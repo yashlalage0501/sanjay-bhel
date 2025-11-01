@@ -7,7 +7,7 @@ import { Phone, Mail, MapPin, Instagram, Send, MessageCircle } from "lucide-reac
 export default function ContactPage() {
   const [selectedBranch, setSelectedBranch] = useState("saradwadi");
 
-  const branches = {
+  const branches: any = {
   saradwadi:
     "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.257947669423!2d74.383000!3d18.828200!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2bf3c1e9d123b%3A0x123abc111222333!2sSaradwadi%2C%20Shirur!5e0!3m2!1sen!2sin!4v1710000000000",
   
