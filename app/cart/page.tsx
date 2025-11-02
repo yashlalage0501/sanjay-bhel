@@ -7,7 +7,7 @@ export default function CartPage() {
   const { items, increaseQty, decreaseQty, removeItem, clearCart } =
     useCartStore();
 
-  const total = items.reduce((sum, x) => sum + x.price * x.qty, 0);
+//   const total = items.reduce((sum, x) => sum + x.price * x.qty, 0);
 
   const sendWhatsAppOrder = () => {
     if (items.length === 0) return;
