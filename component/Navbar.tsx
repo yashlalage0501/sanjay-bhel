@@ -1,16 +1,19 @@
 "use client";
 
 import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ShoppingCart } from "lucide-react";
 import Image from "next/image";
+import { useCartStore } from "@/app/store/cart";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const { items } = useCartStore();
+
+  const cartCount = items.reduce((sum, item) => sum + item.qty, 0);
 
   const navLinks = [
     { name: "Home", href: "/" },
     { name: "Menu", href: "/menu" },
-    // { name: "About", href: "/about" },
     { name: "Contact", href: "/contact" },
   ];
 
@@ -30,7 +33,7 @@ export default function Navbar() {
         </a>
 
         {/* ✅ DESKTOP LINKS */}
-        <div className="hidden md:flex gap-8">
+        <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
             <a
               key={link.name}
@@ -40,6 +43,20 @@ export default function Navbar() {
               {link.name}
             </a>
           ))}
+
+          {/* ✅ CART BUTTON (Desktop) */}
+          <a
+            href="/cart"
+            className="relative flex items-center gap-2 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition"
+          >
+            <ShoppingCart size={20} />
+            Cart
+            {cartCount > 0 && (
+              <span className="absolute -top-2 -right-2 bg-white text-red-600 text-xs font-bold px-2 py-0.5 rounded-full shadow">
+                {cartCount}
+              </span>
+            )}
+          </a>
         </div>
 
         {/* ✅ MOBILE MENU TOGGLE */}
@@ -51,7 +68,7 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* ✅ MOBILE DROPDOWN MENU */}
+      {/* ✅ MOBILE MENU */}
       <div
         className={`md:hidden bg-white border-t shadow-md transition-all duration-300 ${
           open ? "max-h-60" : "max-h-0 overflow-hidden"
@@ -67,6 +84,20 @@ export default function Navbar() {
               {link.name}
             </a>
           ))}
+
+          {/* ✅ CART BUTTON (Mobile) */}
+          <a
+            href="/cart"
+            className="relative flex items-center gap-2 px-4 py-2 bg-red-600 text-white rounded-lg mt-2"
+          >
+            <ShoppingCart size={20} />
+            Cart
+            {cartCount > 0 && (
+              <span className="absolute -top-2 -right-2 bg-white text-red-600 text-xs font-bold px-2 py-0.5 rounded-full shadow">
+                {cartCount}
+              </span>
+            )}
+          </a>
         </ul>
       </div>
 
